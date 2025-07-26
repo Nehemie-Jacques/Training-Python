@@ -206,3 +206,173 @@ while time <= 0:
 
 interest = principale * rate * time
 print("The interest is ${interest:,.2f}".format(interest=interest))   
+
+"For loop" permet de parcourir une chaine de caractere, une liste ou un dictionnaire
+for x in range(1, 21):
+    if x == 13:
+        break
+    else: 
+        print(x)
+
+import time 
+my_time = int(input("Enter the number of seconds: "))
+for x in range(my_time, 0, -1): # fait une boucle de 0 a my_time en decrementant de 1
+    second = x % 60
+    minutes = int(x / 60) % 60
+    hours = int(x / 3600)
+    print("{hours:02}:{minutes:02}:{second:02}".format(hours=hours, minutes=minutes, second=second)) 
+    time.sleep(1) # attend 1 seconde
+
+    print("Time's up!" )
+
+for x in range(3): # fait une boucle de 0 a 2
+    for y in range(1, 10): # fait une boucle de 1 a 9
+        print(y, end="") # affiche y sans saut de ligne 
+    print()
+
+rows = int(input("Enter the # of rows: "))
+colums = int(input("Enter the # of columns: "))
+symbol = input("Enter a symbol to use: ")
+
+for x in range(rows):
+    for y in range(colums):
+        print(symbol, end=""
+    )
+    print()
+
+List = [] " Une liste est une chaine de caractere, On peut duplicer une liste, elle est mutable" et ordonnée
+Set = {} " Un dictionnaire est une chaine de caractere, On ne peut pas duplicer un dictionnaire, elle non ordonnée et non mutable"
+Tuple = () " Un tuple est une chaine de caractere, On peut duplicer un tuple, il est ordonné et inmutable"
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+print(fruits[1:4])
+print(dir(fruits)) # affiche les methodes et attributs de la chaine de caractere
+print(len(fruits)) # affiche la longueur de la chaine de caractere
+print(help(fruits))
+
+for x in fruits:
+    print(fruits)
+
+fruits[0] = "orange"
+print(fruits)
+
+fruits.append("lemon")
+print(fruits)
+
+fruits.insert(1, "grape")
+print(fruits)
+
+fruits.remove("apple")
+print(fruits)
+
+fruits.pop(2)
+print(fruits)
+
+fruits.sort()
+print(fruits)
+print(fruits.index("kiwi"))
+
+fruits.reverse()
+print(fruits) 
+
+fruits.clear()
+print(fruits)
+
+del fruits
+print(fruits)
+
+foods = []
+prices = []
+total = 0
+
+while True:
+    food = input("Enter a food to buy (q to quit): ")
+    if food.lower() == "q":
+        break
+    else:
+        price = float(input(f"Enter the price of a {food}: $"))
+        foods.append(food)
+        prices.append(price)
+
+print("\n---- YOUR CART ----")
+
+for i in range(len(foods)):
+    print(f"{foods[i]}: ${prices[i]:.2f}")
+    total += prices[i]
+
+print()
+print("Your total is: ${total}".format(total=total)) 
+
+
+
+groceries = [{"apple", "banana", "cherry", "kiwi", "mango"},
+{"carrot", "potato", "tomato"},
+{"beef", "pork", "chicken"},] 
+
+for collection in groceries:
+    for food in collection:
+        print(food, end=" ")
+    print() 
+
+num_pad = ((1, 2, 3),
+           (4, 5, 6),
+           (7, 8, 9),
+           ("*", 0, "#"))
+
+for row in num_pad: 
+    for num in row:
+        print(num, end=" ")
+    print()
+
+questions = (
+    "How many states are in the United States?",
+    "Which planet is closest to the sun?",
+    "What is the capital of France?",
+    "How many letters are in the alphabet?",
+    "What is best for making a cup of tea?"
+)
+
+options = (
+    ("A. 50", "B. 51", "C. 52", "D. 53"),
+    ("A. Mercury", "B. Venus", "C. Earth", "D. Mars"),
+    ("A. Paris", "B. London", "C. Rome", "D. Madrid"),
+    ("A. 26", "B. 27", "C. 28", "D. 29"),
+    ("A. Tea", "B. Coffee", "C. Juice", "D. Water")
+)
+
+answers = ("A", "A", "A", "A", "D")  
+guesses = []
+score = 0
+
+for question_num in range(len(questions)):
+    print("--------------------------")
+    print(questions[question_num])
+
+    for option in options[question_num]:
+        print(option)
+
+    guess = input("Enter (A, B, C, D): ").upper()
+    guesses.append(guess)
+
+    if guess == answers[question_num]:
+        score += 1
+        print("✅ CORRECT!")
+    else:
+        print("❌ INCORRECT!")
+        print(f"The correct answer was: {answers[question_num]}")
+
+print("--------------------------")
+print("          RESULTS         ")
+print("--------------------------")
+
+print("Correct answers: ", end="")
+for ans in answers:
+    print(ans, end=" ")
+print()
+
+print("Your guesses    : ", end="")
+for g in guesses:
+    print(g, end=" ")
+print()
+
+percentage = int(score / len(questions) * 100)
+print(f"🎯 Your score is: {percentage}%")
