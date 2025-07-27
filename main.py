@@ -376,3 +376,200 @@ print()
 
 percentage = int(score / len(questions) * 100)
 print(f"🎯 Your score is: {percentage}%")
+
+
+capitals = {"USA": "Washington, D.C.",
+            "France": "Paris",
+            "Germany": "Dortmund",
+            "Italy": "Rome",
+            "Spain": "Madrid"}
+
+print(dir(capitals))
+print(help(capitals))
+print(capitals.get("Germany"))
+
+if capitals.get("Germany"):
+    print("That capital exists.")
+else:
+    print("That capital does not exist.")
+
+capitals.update({"Germany": "Berlin"})
+capitals.pop("Spain") # supprime le dictionnaire
+capitals.popitem() # supprime le dernier dictionnaire
+capitals.clear() # supprime tout le dictionnaire
+
+keys = capitals.keys() # renvoie les clés du dictionnaire
+for k in capitals.keys():
+    print(k)
+values = capitals.values() # renvoie les valeurs du dictionnaire
+for value in capitals.values():
+    print(value)
+
+items = capitals.items()
+for item in items:
+    print(item)
+
+for key, value in capitals.items():
+    print(f"The capital of {key} is {value}")
+
+menu = {"Burger": 3.99,
+        "Fries": 1.99,
+        "Shake": 1.99,
+        "Ice Cream": 2.99,
+        "Soda": 1.99,
+        "Milkshake": 2.99,
+        "Salad": 3.99,
+        "Chips": 1.99,
+        "Nuggets": 3.99
+}
+
+menu_lower = {k.lower(): k for k in menu}
+
+cart = []
+total = 0
+
+print("------- MENU -------")
+for key, value in menu.items():
+    print(f"{key:12}: ${value:.2f}")
+print("---------------------")
+
+
+while True:
+    choice = input("Select an item from the menu (q to quit): ").lower()
+    if choice == "q":
+        break
+    elif choice in menu_lower:
+        real_name = menu_lower[choice]
+        cart.append(real_name)
+    else:
+        print("That item is not on the menu.")
+
+print("-------- Your order -------")
+for food in cart:
+    total += menu[food]
+    print(f"{food:12} - ${menu[food]:.2f}")
+print("-------------------------")
+print(f"Total is: ${total:.2f}")
+
+import random
+
+low = 1
+high = 100
+options = ("rock", "paper", "scissors")
+cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+
+# number = random.randint(low, high)
+# number = random.random()
+# option = random.choice(options)
+random.shuffle(cards) # mélange les cartes
+
+print(cards)
+
+
+import random
+lowest_num = 1
+highest_num = 100
+answer = random.randint(lowest_num, highest_num) # génère un nombre aléatoire entre 1 et 100
+guesses = 0
+is_running = True
+
+print("Python Number Guessing Game")
+print(f"Select a number between {lowest_num} and {highest_num}")
+
+while is_running:
+    guess = input("Enter your guess: ")
+    if guess.isdigit(): # vérifie si la chaine de caractère est un nombre
+        guess = int(guess)
+        guesses += 1
+
+        if guess < lowest_num or guess > highest_num:
+            print("That number is out of range")
+            print(f"Please select a number between {lowest_num} and {highest_num}")
+        elif guess < answer:
+            print("Too low ! Try again ! ")
+        elif guess > answer:
+            print("Too high ! Try again ! ")
+        else:
+            print(f"CORRECT ! The answer was {answer}")
+            print(f"You guessed the number in {guesses} guesses")
+            is_running = False
+    else:
+        print("Invalid guess")
+        print(f"Select a number between {lowest_num} and {highest_num}")
+
+import random
+
+options = ("rock", "paper", "scissors")
+running = True
+
+while running: 
+
+    player = None
+    computer = random.choice(options)
+
+
+    while player not in options:
+        player = input("Enter a choice (rock, paper, scissors): ").lower()
+
+    print(f"Player: {player}")
+    print(f"Computer: {computer}")
+
+    if player == computer:
+        print("Draw")
+    elif player == "rock" and computer == "scissors":
+        print("Player wins")
+    elif player == "paper" and computer == "rock":
+        print("Player wins")
+    elif player == "scissors" and computer == "paper":
+        print("Player wins")
+    else:
+        print("Computer wins") 
+
+    play_again = input("Play again ? (y/n): ").lower()
+    if not play_again == "y":
+        running = False
+
+print("Thanks for playing !") 
+
+
+def happy_birthday(name, age):
+    print(f"Happy birthday {name}!")
+    print(f"You are {age} years old.")
+    print("Happy birthday to you !")
+
+happy_birthday("John Doe", 25)
+
+def display_invoice(username, amount, due_date):
+    print(f"Hello {username}")
+    print(f"Your bill of ${amount:.2f} is due: {due_date}")
+
+display_invoice("Roberto", 100.01, "2023-01-01")
+
+def add(x, y):
+    z = x + y
+    return z
+
+def subrract(x, y):
+    z = x - y
+    return z
+
+def multiply(x, y):
+    z = x * y
+    return z
+
+def divide(x, y):
+    z = x / y
+    return z
+
+print(add(1, 2))
+print(subrract(1, 2))
+print(multiply(1, 2))
+print(divide(1, 2))
+
+def create_name(first, last):
+    first = first.capitalize()
+    last = last.capitalize()
+    return f"{first} {last}"
+
+full_name = create_name("john", "doe")
+print(full_name)
