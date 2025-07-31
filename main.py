@@ -740,3 +740,142 @@ result = example.surface_area(5)
 
 print(result)
 
+def show_balance(balance):
+    print("************")
+    print(f"Your balance is ${balance:.2f}") 
+    print("************")
+
+def deposit():
+    print("************")
+    amount = float(input("Enter the amount to deposit: "))
+    print("************")
+
+    if amount <= 0:
+        print("Amount must be greater than 0.")
+    else:
+        return amount
+
+def withdraw(balance):
+    print("************")
+    amount = float(input("Enter the amount to withdraw: "))
+    print("************")
+
+    if amount > balance:
+        print("Insufficient funds")
+        return 0
+    elif amount < 0:
+        print("Amount must br greate than 0")
+        return 0
+    else :
+        return amount
+
+def main():
+    balance = 0
+    is_running = True
+
+    while is_running:
+    print("******************")
+    print("    Banking Menu    ")
+    print("******************")
+
+        print("Banking Menu")
+        print("1. Show balance")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Quit")
+
+        choice = input("Enter your choice(1-4): ")
+
+        if choice == "1":
+            show_balance()
+        elif choice == "2":
+            balance += deposit()
+        elif choice == "3":
+            balance = -=  withdraw()
+        elif choice == "4":
+            is_running = False
+        else:
+            print("**********************************************")
+            print("That is not a valid choice. Please try again.")
+            print("**********************************************")
+
+    print("**********************************************")
+    print("Thank you for using the banking menu")
+    print("**********************************************")
+
+    print("Thank you for using the banking menu")
+
+import random  # nécessaire pour random.choice()
+
+# balance initial
+balance = 100
+
+# Fonction qui génère une ligne de 3 symboles aléatoires
+def spin_row():
+    symbols = ['tomato', 'banana', 'cherry', 'kiwi', 'mango']
+    result = []
+    for _ in range(3):
+        result.append(random.choice(symbols))
+    return result
+
+# Fonction qui affiche une ligne de symboles
+def print_row(row):
+    print("*************")
+    print(" | ".join(row))
+    print("*************")
+
+# Fonction qui calcule le gain en fonction du symbole et de la mise
+def get_payout(row, bet):
+    if row[0] == row[1] == row[2]:  # si les 3 symboles sont identiques
+        if row[0] == 'tomato':
+            return bet * 3
+        elif row[0] == 'banana':
+            return bet * 2
+        else:  # tous les autres symboles gagnent juste la mise
+            return bet * 1
+    return 0  # sinon, aucun gain
+
+# Boucle principale du jeu
+while balance > 0:
+    print(f"💰 Current balance: ${balance:.2f}")
+    bet = input("🎲 Place your bet: ")
+
+    if not bet.isdigit():
+        print("❌ Invalid bet. Please enter a number.")
+        continue
+
+    bet = int(bet)
+
+    if bet > balance:
+        print("❌ Insufficient funds.")
+        continue
+
+    if bet <= 0:
+        print("❌ Bet must be greater than 0.")
+        continue
+
+    balance -= bet  # on déduit la mise
+
+    print("🎰 Spinning...\n")
+    row = spin_row()
+    print_row(row)
+
+    payout = get_payout(row, bet)
+
+    if payout > 0:
+        print(f"🎉 You won ${payout:.2f}!")
+    else:
+        print("😢 Sorry, you lost.")
+
+    balance += payout
+
+    play_again = input("🔁 Play again? (Y/N): ")
+    if play_again.lower() != "y":
+        break
+
+print("🎮 Game over. Thanks for playing!")
+
+# Bloc standard pour lancer la fonction principale si besoin
+# (ici non utilisé mais bon à connaître)
+if __name__ == "__main__":
+    pass  # rien à lancer automatiquement
