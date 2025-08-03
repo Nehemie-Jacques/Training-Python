@@ -879,3 +879,53 @@ print("🎮 Game over. Thanks for playing!")
 # (ici non utilisé mais bon à connaître)
 if __name__ == "__main__":
     pass  # rien à lancer automatiquement
+
+
+
+# Exercice 2
+
+# Fonction qui teste si un nombre est premier
+def est_premier(n):
+    if n < 2: 
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+compteur = 0
+nombre = 2
+
+# Boucle pour trouver le 512e nombre premier
+while True: 
+    if est_premier(nombre):
+        compteur += 1
+        if compteur == 512:
+            print(f"Le 512e nombre premier est : {nombre}")
+            break
+    nombre += 1
+
+# Exercice 3
+# Trouver tous les triplets pythagoriciens (p, q, r) tels que p² + q² = r²
+# Et retourner le produit maximum p × q × r
+
+max_produit = 0
+best_triplet = ()
+
+for p in range(1, 2976): # Ceci représente le 1er coté du triangle
+    for q in range(p + 1, 2976 - p): 
+    # 2e coté ; p + 1 pour s’assurer que q > p et éviter les doublons 
+    # 2976 - p - 1 incluse pour s’assurer que r ne devient ni négatif ni nul
+        r = 2976 - p - q # Déduction du troisième coté
+        if r <= q: # Vérifie que r > q pour eviter les doublons
+            continue
+        if p * p + q * q == r * r: 
+        # Vérifie si le triplet est pythagoricien cad p² + q² = r²
+        # Si oui, le triangle est rectangulaire et on calcule le produit p × q × r
+            produit = p * q * r 
+            if produit > max_produit:
+                max_produit = produit
+                best_triplet = (p, q, r)
+            
+print(f"Le meilleur triplet (p, q, r) est : {best_triplet}")
+print(f"Le produit p × q × r est : {max_produit}")
