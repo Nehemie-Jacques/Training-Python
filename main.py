@@ -1208,3 +1208,105 @@ shaps = [Circle(5), Triangle(10, 5), Pizza("pepperoni", 5)]
 
 for shape in shapes:
     print(f"{shape.area()}cm²")
+
+
+class Employee:
+
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+
+    def get_info(self):
+        return f"{self.name} = {self.position}"
+
+    @staticmethod
+    def is_valid_position(position):
+        valid_positions = ["manager", "developer", "tester"]
+        return position in valid_positions
+
+employee1 = Employee("John Doe", "manager")
+employee2 = Employee("Jane Doe", "developer")
+
+print(employee1.is_valid_position("manager"))
+print(employee1.get_info())
+print(employee2.get_info())
+
+
+class Student:
+
+    count = 0
+    total_gpa = 0
+
+    def __init__(self, name, gpa):
+        self.name = name
+        self.gpa = gpa
+        Student.count += 1
+        Student.total_gpa += gpa
+
+    def get_info(self):
+        return f"{self.name} {self.gpa}"
+
+    @classmethod
+    def get_count(cls):
+        return f"Total number of students: {cls.count}"
+
+    @classmethod
+    def get_average_gpa(cls):
+        if cls.count == 0:
+            return 0
+        else: 
+            return f"Average GPA: {cls.total_gpa / cls.count}"
+
+student1 = Student("John Doe", 3.2)
+student2 = Student("Jane Doe", 3.5)
+student3 = Student("Bob Doe", 3.8)
+
+print(student1.get_info())
+print(student2.get_info())
+print(student3.get_info())
+
+print(Student.get_count())
+print(Student.get_average_gpa())
+
+
+
+class Book: 
+
+    def __init__(self, title, author, num_pages):
+        self.title = title
+        self.author = author
+        self.pages = num_pages
+
+    def __init__(self, other):
+        return self.title == other.title and self.author == other.author
+
+    def __init__(self, other):
+        return self.num_pages == other.num_pages
+
+    def __init__(self, other):
+        return self.num_pages > other.num_pages
+
+    def __init__(self, other):
+        return f"{self.num_pages + other.num_pages} pages"
+
+    def __contains__(self, keyword):
+        return keyword in self.title or keyword in self.author
+
+    def __getitem__(self, index):
+        if key == "title":
+            return self.title
+        elif key == "author":
+            return self.author
+        elif key == "num_pages":
+            return self.num_pages
+        else:
+            return f"Invalid key: {key}"
+
+book1 = Book("The Great Gatsby", "F. Scott Fitzgerald", 180)
+book2 = Book("To Kill a Mockingbird", "Harper Lee", 336)
+book3 = Book("Pride and Prejudice", "Jane Austen", 432)
+
+print(book1)
+print(book2)
+print(book3)
+
