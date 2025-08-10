@@ -1310,3 +1310,285 @@ print(book1)
 print(book2)
 print(book3)
 
+class Rectangle: 
+    def __init__(self, width, height):
+        self._width = width
+        self._height = height
+
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, new_width):
+        if new_width > 0:
+            self._width = new_width
+        else: 
+            print("Height must be greater than 0")
+
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self, new_height):
+        if new_height > 0:
+            self._height = new_height
+        else: 
+            print("Height must be greater than 0")
+
+    @width.deleter
+    def width(self):
+        del self._width
+        print("Width deleted")
+
+    @height.deleter
+    def height(self):
+        del self._height
+        print("Height deleted")
+
+rectangle = Rectangle(5, 10)
+
+rectangle.width = 10
+rectangle.height = 20
+
+del rectangle.width
+del rectangle.height
+
+
+
+
+
+
+def add_sprinkles(func):
+    def wrapper(*args, **kwargs):
+        print("Adding sprinkles...")
+        func(*args, **kwargs)
+    return wrapper
+
+def add_fudge(func):
+    def wrapper(*args, **kwargs):
+        print("Adding fudges...")
+        func(*args, **kwargs)
+    return wrapper
+
+@add_sprinkles
+@add_fudge
+def get_ice_cream(flavor):
+    print(f"Enjoy your {flavor} ice cream!")
+
+get_ice_cream("vanilla")
+
+
+try:
+    number = int(input("Enter a number: "))
+    print(1 / number)
+except zeroDivisionError:
+    print("You can't divide by zero!")
+except ValueError:
+    print("Invalid input. Please enter a number.")
+except Exception: 
+    print("An error occurred.")
+finally:
+    print("Goodbye!")
+
+
+import os 
+
+file_path = "/script1.py"
+
+if os.path.exists(file_path):
+    print(f"The file {file_path} exists.")
+
+    if os.path.isfile(file_path):
+        print(f"The file {file_path} is a file.")
+    else:
+        print(f"The file {file_path} is not a file.")
+else: 
+    print(f"The file {file_path} does not exist.")
+
+
+txt_data = "I like pizza !"
+
+file_path = "/watch.py"
+
+with open(file_path, "w") as file:
+    file.write(txt_data) 
+
+
+import json
+import csv
+
+employees = [
+    ["Name", "Age", "Position"],
+    ["John Doe", 30, "Manager"],
+    ["Jane Doe", 25, "Developer"],
+    ["Bob Smith", 35, "Designer"]
+]
+
+employee = { 
+    "name": "John Doe",
+    "age": 30,
+    "position": "Manager"
+}
+
+file_path = "/home/nehemie/Mes_projets/Path"
+
+try: 
+    with open(file_path, "w") as file:
+        json.dump(employee, file, indent=4)
+        print(f"Data saved to {file_path}")
+except FileExistsError:
+    print(f"File {file_path} already exists.")
+
+try: 
+    with open(file_path, "w") as file:
+        writer = csv.writer(file)
+        for row in employees:
+            writer.writerow(row)
+        print(f"Data saved to {file_path}")
+except FileExistsError:
+    print(f"File {file_path} already exists.")
+
+file_path = "/home/nehemie/Mes_projets/Path.txt"
+
+with open(file_path, "r") as file:
+    data = file.read()
+    print(data)
+except FileNotFoundError:
+    print(f"File {file_path} not found.") 
+except PermissionError:
+    print(f"You don't have permission to read {file_path}.")
+
+import json
+
+file_path = "/home/nehemie/Mes_projets/Path"
+
+try: 
+    with open(file_path, "r") as file:
+        data = json.load(file)
+        print(data)
+except FileNotFoundError:
+    print(f"File {file_path} not found.")      
+
+
+import csv 
+
+file_path = "/home/nehemie/Mes_projets/Path"
+
+try:
+    with open(file_path, "r") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            print(row)
+except FileNotFoundError:
+    print(f"File {file_path} not found.")
+except PermissionError:
+    print(f"You don't have permission to read {file_path}.")
+
+
+import datetime
+
+date = datetime.date(2025, 8, 9)
+today = datetime.date.today()
+
+time = datetime.time(9, 30, 0)
+now = datetime.datetime.now()
+
+now = now.strftime("%Y-%m-%d %H:%M:%S")
+
+target_datetime = datetime.datetime(2025, 8, 9, 9, 30, 0)
+Current_datetime = datetime.datetime.now()
+
+if target_datetime < Current_datetime:
+    print("The target datetime has passed.")
+else:
+    print("The target datetime has not passed yet.")
+
+
+import datetime
+import time
+import pygame 
+
+def set_alarm(alarm_time):
+    print(f"Alarm set for {alarm_time}.")
+    sound_file = "alarm.wav"
+    is_running = True
+
+    while is_running:
+        Current_time = datetime.datetime.now().strftime("%H:%M:%S")
+        print(f"Current time: {Current_time}")
+
+        if Current_time == alarm_time:
+            print("Time's up!")
+
+            pygame.mixer.init()
+            pygame.mixer.music.load(sound_file)
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy():
+                time.sleep(1)
+            is_running = False
+
+
+if __name__ == "__main__":
+    alarm_time = input("Enter the alarm time (HH:MM:SS): ")
+    set_alarm(alarm_time)
+
+
+import threading
+import time
+
+def walk_dog(first, last):
+    time.sleep(8)
+    print("The dog has walked.")
+
+    def take_out_trash():
+        time.sleep(3)
+        print(f"The trash has been taken out by {first} and {last}.")
+
+    def get_mail():
+        time.sleep(2)
+        print("The mail has been taken out.")
+
+    chore1 = threading.Thread(target=walk_dog  , args=(first, last))
+    chore2 = threading.Thread(target=take_out_trash)
+    chore3 = threading.Thread(target=get_mail)
+
+    chore1.start()
+    chore2.start()
+    chore3.start()
+
+    chore1.join()
+    chore2.join()
+    chore3.join()
+
+    print("All chores have been completed.")
+
+
+
+import requests
+
+base_url = "https://pokeapi.co/api/v2/"
+
+def get_pokemon_info(name):
+    url = f"{base_url}/pokemon/{name}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        pokemon_data = response.json()
+        return pokemon_data
+    else:
+        print(f"Error: {response.status_code}")
+
+pokemon_name = "pikachu"
+get_pokemon_info(pokemon_name)
+
+pokemon_info = get_pokemon_info(pokemon_name)
+
+if pokemon_info:
+    print(f"Name: {pokemon_info['name']}")
+    print(f"Type: {pokemon_info['types'][0]['type']['name']}")
+    print(f"Height: {pokemon_info['height']}")
+    print(f"Weight: {pokemon_info['weight']}")
+else:
+    print("Pokemon not found.")
