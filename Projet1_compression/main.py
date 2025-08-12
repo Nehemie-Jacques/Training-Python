@@ -21,7 +21,7 @@ if __name__ == "__main__":
     resultats = trouver_fichiers_volumineux(DOSSIER_CIBLE)
 
     if resultats :
-        print("Fichiers volumineux trouv�s :")
+        print("Fichiers volumineux trouves :")
         for chemin, taille in resultats:
             print(f"- {chemin} ({taille / (1024 * 1024):.2f} Mo)")
     else:

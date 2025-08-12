@@ -1,52 +1,91 @@
 # Automatisation de tâches système
 
-* Objectif : Créer un script qui parcourt un dossier, détecte les fichiers volumineux et les compresse. 
-* Compétences : os, shutil, zipfile, manipulation fichiers/dossiers.
-* Évolution possible : Ajouter un envoi automatique des fichiers compressés vers un serveur S3 (AWS).
+## 📌 Objectif
+Créer un script Python qui parcourt un dossier, détecte les fichiers volumineux et les compresse dans une archive .zip.
+En option, le script peut envoyer cette archive vers un bucket AWS S3.
 
-## Travail : 
+---
 
-1. Parcourt d'un dossier donné
+## 🛠 Compétences mobilisées
+- os → navigation dans les fichiers et dossiers.
 
-2. Repère les fichiers volumineux (taille > seuil défini)
+- zipfile → création d’archives .zip.
 
-3. Les compresse dans une archive .zip
+- shutil → manipulation de fichiers et dossiers.
 
-4. (Optionnel) Envoie cette archive vers un bucket S3 (AWS)
+- pathlib (optionnel) → rendre le code plus lisible.
 
-###  Définir les paramètres du projet 
+- boto3 (optionnel) → interaction avec AWS S3.
 
-1. os → naviguer dans les fichiers et dossiers
+---
 
-2. zipfile → créer une archive .zip
+## Arborescence 
+``` bash
 
-3. boto3 (optionnel pour AWS S3)
+Projet1_compression/
+├── main.py         # Script principal
+├── README.md       # Explication du projet
+└── dossier_a_scanner/           # Dossier à scanner
 
-4. pathlib (optionnel mais rend le code plus lisible)
+``` 
 
-#### Création des fichiers
+--- 
+
+## 🔄 Fonctionnement
+Parcourt d'un dossier donné.
+
+- Détection des fichiers volumineux (taille > seuil défini).
+
+- Compression dans une archive .zip.
+
+- (Optionnel) Envoi de l’archive vers un bucket AWS S3.
+
+---
+
+## ⚙️ Paramètres du projet
+* Seuil de taille : ajustable dans le code (ex. 5 Mo).
+
+* Chemin du dossier : modifiable dans le script.
+
+---
+
+## 📂 Création de fichiers de test
+Exécuter les commandes suivantes dans un terminal Linux/macOS pour créer des fichiers de tailles différentes dans dossier_a_scanner :
+
+``` bash
 
 # Fichier de 1 Mo
-`` dd if=/dev/zero of=dossier_a_scanner/petit.txt bs=1M count=1 
+dd if=/dev/zero of=dossier_a_scanner/petit.txt bs=1M count=1
 
 # Fichier de 5 Mo
-`` dd if=/dev/zero of=dossier_a_scanner/moyen.txt bs=1M count=5
+dd if=/dev/zero of=dossier_a_scanner/moyen.txt bs=1M count=5
 
 # Fichier de 8 Mo
-`` dd if=/dev/zero of=dossier_a_scanner/gros.txt bs=1M count=8
+dd if=/dev/zero of=dossier_a_scanner/gros.txt bs=1M count=8
 
+```
 
-## Explications : 
-1. dd → commande pour générer des fichiers
+---
 
-2. if=/dev/zero → remplit avec des octets 0
+### Explication des paramètres :
 
-3. of= → nom du fichier
+* dd → commande pour générer des fichiers.
 
-4. bs=1M → taille du bloc (1 Mo)
+* if=/dev/zero → remplit le fichier avec des octets nuls.
 
-5. count= → nombre de blocs
+* of= → nom et emplacement du fichier créé.
 
-# Exécution 
+* bs=1M → taille du bloc (1 Mo).
 
-`` python main.py
+* count= → nombre de blocs.
+
+---
+
+## ▶️ Exécution
+Lancer le script avec :
+
+``` bash
+python main.py
+
+(Si boto3 est utilisé pour AWS, configurez vos identifiants AWS via aws configure.)
+
