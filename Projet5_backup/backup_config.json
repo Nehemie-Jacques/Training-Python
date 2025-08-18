@@ -1,0 +1,5 @@
+{
+    "folders": ["../Projet1_compression/dossier_a_scanner", "../Projet2_monitoring/logs"],
+    "backup_dir": "backups",
+    "retention": 3
+}
