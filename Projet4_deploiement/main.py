@@ -58,7 +58,7 @@ DEPLOY_PATH = config["deploy_path"]
 
 # Cration d'une archive tar.gz du projet local
 def make_archive(source_dir, archive_name):
-    with tarfile.open(archive_name, "w:gz") as tar:
+    with tarfile.open(archive_name, "w:gz") as tar:   # w:gz permet de créer une archive tar.gz
         tar.add(source_dir, arcname = os.path.basename(source_dir))
     print(f"Archive créée: {archive_name}")
 

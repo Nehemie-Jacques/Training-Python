@@ -25,4 +25,4 @@ if __name__ == "__main__":
         for chemin, taille in resultats:
             print(f"- {chemin} ({taille / (1024 * 1024):.2f} Mo)")
     else:
-        print("Aucun fichier volumineux trouv�.")
+        print("Aucun fichier volumineux trouvé.")

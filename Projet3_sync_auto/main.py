@@ -1,5 +1,5 @@
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler  
+from watchdog.observers import Observer     # lance un thread qui écoute le système de fichiers.
+from watchdog.events import FileSystemEventHandler      # classe de base à étendre pour réagir aux événements (create/modify/delete).
 import time
 import os
 import shutil
