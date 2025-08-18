@@ -2,22 +2,47 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler  
 import time
 import os
+import shutil
+from datetime import datetime
 
 DOSSIER_SOURCE = "dossier_source"
+DOSSIER_BACKUP = "dossier_backup"
 
 class MonHandler(FileSystemEventHandler):
     def on_created(self, event):
-        print(f"Nouveau fichier créé : {event.src_path}")
+        if not event.is_directory:
+            self.copier_fichier(event.src_path)
 
     def on_modified(self, event):
-        print(f"Fichier modifié : {event.src_path}")
+        if not event.is_directory:
+            self.copier_fichier(event.src_path)
 
     def on_deleted(self, event):
-        print(f"Fichier supprimé : {event.src_path}")
+        if not event.is_directory:
+            self.supprimer_fichier(event.src_path)
+
+    def copier_fichier(self, chemin_source):
+        nom_fichier = os.path.basename(chemin_source)
+        chemin_backup = os.path.join(DOSSIER_BACKUP, nom_fichier)
+        shutil.copy2(chemin_source, chemin_backup)
+        print(f"[{self.timestamp()}] Fichier synchronisé : {nom_fichier}")
+
+    def supprimer_fichier(self, chemin_source):
+        nom_fichier = os.path.basename(chemin_source)
+        chemin_backup = os.path.join(DOSSIER_BACKUP, nom_fichier)
+        if os.path.exist(chemin_backup):
+            os.remove(chemin_backup)
+            print(f"[{self.timestamp()}] Fichier supprimé : {nom_fichier}")
+        else:
+            print(f"[{self.timestamp()}] Fichier non trouvé : {nom_fichier}")
+
+    def timestamp(self):
+        return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 if __name__ == "__main__":
-    if not os.path.exists(DOSSIER_SOURCE):
-        os.makedirs(DOSSIER_SOURCE)
+    # Création des dossiers de source et de backup si ils n'existent pas
+    os.makedirs(DOSSIER_SOURCE, exist_ok=True)
+    os.makedirs(DOSSIER_BACKUP, exist_ok=True)
 
     event_handler = MonHandler()
     observer = Observer()
@@ -25,6 +50,7 @@ if __name__ == "__main__":
 
     observer.start()
     print(f"👀 Surveillance en cours sur '{DOSSIER_SOURCE}'...")
+    print(f"📂 Sauvegarde vers '{DOSSIER_BACKUP}'...")
 
     try:
         while True:
